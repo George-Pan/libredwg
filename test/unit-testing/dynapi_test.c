@@ -41698,22 +41698,12 @@ static int test_TABLESTYLE (const Dwg_Object *obj)
   Dwg_Object_TABLESTYLE *restrict tablestyle = obj->tio.object->tio.TABLESTYLE;
   failed = 0;
   {
-    Dwg_TABLESTYLE_Cell* cells;
-    BITCODE_BL count = 0;
-    if (dwg_dynapi_entity_value (tablestyle, "TABLESTYLE", "num_cells", &count, NULL)
-        && dwg_dynapi_entity_value (tablestyle, "TABLESTYLE", "cells", &cells, NULL)
-        && cells == tablestyle->cells)
-      pass ();
-    else
-      fail ("TABLESTYLE.cells [Dwg_TABLESTYLE_Cell*] * %u num_cells", count);
-  }
-  {
-    Dwg_TABLESTYLE_Cell cellstyle;
+    Dwg_TABLESTYLE_cellstyle cellstyle;
     if (dwg_dynapi_entity_value (tablestyle, "TABLESTYLE", "cellstyle", &cellstyle, NULL)
         && !memcmp (&cellstyle, &tablestyle->cellstyle, sizeof (tablestyle->cellstyle)))
         pass ();
     else
-        fail ("TABLESTYLE.cellstyle [Dwg_TABLESTYLE_Cell]");
+        fail ("TABLESTYLE.cellstyle [Dwg_TABLESTYLE_cellstyle]");
   }
   {
     BITCODE_H cellstyle_handle;
@@ -41807,21 +41797,6 @@ static int test_TABLESTYLE (const Dwg_Object *obj)
       pass ();
     else
       fail ("TABLESTYLE.name [T] '%s' <> '%s'", name, tablestyle->name);
-  }
-  {
-    BITCODE_BL num_cells;
-    if (dwg_dynapi_entity_value (tablestyle, "TABLESTYLE", "num_cells", &num_cells, NULL)
-        && num_cells == tablestyle->num_cells)
-      pass ();
-    else
-      fail ("TABLESTYLE.num_cells [BL] %u != %u", tablestyle->num_cells, num_cells);
-    num_cells++;
-    if (dwg_dynapi_entity_set_value (tablestyle, "TABLESTYLE", "num_cells", &num_cells, 0)
-        && num_cells == tablestyle->num_cells)
-      pass ();
-    else
-      fail ("TABLESTYLE.num_cells [BL] set+1 %u != %u", tablestyle->num_cells, num_cells);
-    tablestyle->num_cells--;
   }
   {
     BITCODE_BL num_rowstyles;
@@ -47915,20 +47890,20 @@ test_sizes (void)
                "dwg_dynapi_fields_size (\"TABLEGEOMETRY_Cell\"): %d\n", size1, size2);
       error++;
     }
-  size1 = sizeof (struct _dwg_TABLESTYLE_Cell);
-  size2 = dwg_dynapi_fields_size ("TABLESTYLE_Cell");
-  if (size1 != size2)
-    {
-      fprintf (stderr, "sizeof(struct _dwg_TABLESTYLE_Cell): %d != "
-               "dwg_dynapi_fields_size (\"TABLESTYLE_Cell\"): %d\n", size1, size2);
-      error++;
-    }
   size1 = sizeof (struct _dwg_TABLESTYLE_border);
   size2 = dwg_dynapi_fields_size ("TABLESTYLE_border");
   if (size1 != size2)
     {
       fprintf (stderr, "sizeof(struct _dwg_TABLESTYLE_border): %d != "
                "dwg_dynapi_fields_size (\"TABLESTYLE_border\"): %d\n", size1, size2);
+      error++;
+    }
+  size1 = sizeof (struct _dwg_TABLESTYLE_cellstyle);
+  size2 = dwg_dynapi_fields_size ("TABLESTYLE_cellstyle");
+  if (size1 != size2)
+    {
+      fprintf (stderr, "sizeof(struct _dwg_TABLESTYLE_cellstyle): %d != "
+               "dwg_dynapi_fields_size (\"TABLESTYLE_cellstyle\"): %d\n", size1, size2);
       error++;
     }
   size1 = sizeof (struct _dwg_TABLESTYLE_rowstyles);

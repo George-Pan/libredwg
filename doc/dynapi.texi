@@ -8119,15 +8119,11 @@ BL
 @item cellstyle_handle
 H
 @item cellstyle
-Dwg_TABLESTYLE_Cell
+Dwg_TABLESTYLE_cellstyle
 @item num_rowstyles
 BL
 @item rowstyles
 Dwg_TABLESTYLE_rowstyles*
-@item num_cells
-BL
-@item cells
-Dwg_TABLESTYLE_Cell*
 
 @end vtable
 @end indentedblock
@@ -10426,26 +10422,6 @@ Dwg_CellContentGeometry*
 @end vtable
 @end indentedblock
 
-@strong{Dwg_TABLESTYLE_Cell} @anchor{Dwg_TABLESTYLE_Cell}
-@vindex Dwg_TABLESTYLE_Cell
-
-@indentedblock
-@vtable @code
-
-@item parent
-struct _dwg_object_TABLESTYLE*
-@item cell
-Dwg_TABLE_Cell
-@item id
-BL,	DXF 90
-@item type
-BL,	DXF 91
-@item name
-T,	DXF 300
-
-@end vtable
-@end indentedblock
-
 @strong{Dwg_TABLESTYLE_border} @anchor{Dwg_TABLESTYLE_border}
 @vindex Dwg_TABLESTYLE_border
 
@@ -10460,6 +10436,24 @@ BSd
 B
 @item color
 CMC
+
+@end vtable
+@end indentedblock
+
+@strong{Dwg_TABLESTYLE_cellstyle} @anchor{Dwg_TABLESTYLE_cellstyle}
+@vindex Dwg_TABLESTYLE_cellstyle
+
+@indentedblock
+@vtable @code
+
+@item parent
+struct _dwg_object_TABLESTYLE*
+@item id
+BL
+@item type
+BL
+@item name
+TU
 
 @end vtable
 @end indentedblock
